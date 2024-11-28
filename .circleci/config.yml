@@ -15,13 +15,7 @@ jobs:
     steps:
       - checkout
       - run: python3 main-test.py
-  deploy:
-    working_directory: ~/circleci-python
-    docker:
-      - image: "circleci/python:3.6.4"
-    steps:
-      - run: echo "Deploying..."
-
+  
 workflows:
   build_and_test:
     jobs:
@@ -29,9 +23,3 @@ workflows:
       - test:
           requires:
             - build
-      - deploy:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
